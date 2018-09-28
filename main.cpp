@@ -24,19 +24,24 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "avltree_ObtainData.hpp"
-//#include "avltree_ObtainData.cpp"
-//#include "AVL.cpp"//#include "avltree_ObtainData.hpp"
+//#include "catch.hpp" // For testing
 #include "AVL.hpp"
 
 //for Standard Library usage
 using namespace std;
 
 
-int main()
-{
-  ObtainData();
+int main(){
+    int aux = ObtainData();
 
+    /* Errors considered:
+     * 1 -> Invalid input to select data file to use
+     * 2 -> File to open is empty
+     * 3 -> Action selection out of range or NAN
+     * 4 -> ID to search witch decision is NAN
+     * 5 -> List to read is NAN.
+     * 6 -> ID inserted is out of range when inserting manually new node
+     */
 
-return 0;
-
+     return 0;
 }

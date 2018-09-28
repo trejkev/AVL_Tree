@@ -17,6 +17,7 @@
 
 #include "avltree_ObtainData.hpp"
 #include "AVL.hpp"
+#include "catch.hpp" // For testing
 
 uint8_t l_u8_TestInsert = 0;
 
@@ -167,4 +168,27 @@ Decision:
   FileIn.close();
   Exit:
     return 0;
+}
+
+TEST_CASE("Verify the input to select data file to use (.txt)"){
+  SECTION("Exit completed."){
+    // l_iDecision = 7
+    REQUIRE(ObtainData() == 0);
+  }
+  SECTION("Invalid choice of .txt to open with option 6 (number out of range when creating new tree)"){
+    //l_iDecision = 6 then  0 > l_iDecisionList || l_iDecisionList >= 6;
+    REQUIRE(ObtainData() == 1);
+  }
+  SECTION("The data input to create the tree is empty."){
+    // Take one of the TXTs and clean up it all
+    REQUIRE(ObtainData() == 2);
+  }
+  SECTION("Option selected out of range (number shall be between 1 and 7)."){
+    // In main menu, write something out of range between 1 and 7
+    REQUIRE(ObtainData() == 3);
+  }
+  SECTION("ID inserted is out of range when inserting manually new node."){
+    // l_iDecision = 2 then write something out of range between 100000000 and 999999999
+    REQUIRE(ObtainData() == 6);
+  }
 }

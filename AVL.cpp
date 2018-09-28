@@ -33,10 +33,10 @@ int avltree::AVL_Insert(struct st_node *ActualNode, struct st_node *InsertedNode
     return 2; // Ced shall be between the defined range
   }
 
-  //if(ActualNode != NULL){
-    //cout<<"\nNode inserted is "<<InsertedNode->l_u64_key;
-    //cout<<" and is being compared with "<<ActualNode->l_u64_key<<endl;
-//  }
+  /*if(ActualNode != NULL){
+    cout<<"\nNode inserted is "<<InsertedNode->l_u64_key;
+    cout<<" and is being compared with "<<ActualNode->l_u64_key<<endl;
+  }*/
 
   LastNodeIns = InsertedNode;
 
@@ -69,8 +69,7 @@ int avltree::AVL_Insert(struct st_node *ActualNode, struct st_node *InsertedNode
 			ActualNode->l_u32psm_leftchild = InsertedNode;
 			InsertedNode->l_ssm_height = 1; //last node of the tree
       iNodesAmount++;
-      //cout<<"Insertion OK of "<<InsertedNode->l_u64_key<<endl;
-      return 0;
+      goto CalHeight;
 		}else{
       AVL_Insert(ActualNode->l_u32psm_leftchild , InsertedNode);
     }
@@ -82,19 +81,16 @@ int avltree::AVL_Insert(struct st_node *ActualNode, struct st_node *InsertedNode
 			ActualNode->l_u32psm_rightchild = InsertedNode;
 			InsertedNode->l_ssm_height = 1; //last node of the tree
       iNodesAmount++;
-      //cout<<"Insertion OK of "<<InsertedNode->l_u64_key<<endl;
-      return 0;
+      goto CalHeight;
 		}else{
       AVL_Insert(ActualNode->l_u32psm_rightchild , InsertedNode);
     }
 	}
 
-
-
 	// Calculate the height of its parental ancestry
+  CalHeight:
 	AVL_CalcHeight(LastNodeIns);
-
-
+  return 0;
 }
 
 
